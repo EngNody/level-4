@@ -32,6 +32,13 @@ const Drawerr = ({ drawerWidth, setMyMode,noneorblock,drawerType,hideDrower }) =
   const navigate = useNavigate();
   const theme = useTheme();
 
+  const myList =[
+    {  text :"Home" , icon :<Home /> , path:"/"},
+    {  text :"Create" , icon :<Create /> , path:"/create"},
+    {  text :"Profile" , icon :<Person2 />, path:"/profile"},
+    {  text :"Settings" , icon :<Settings />, path:"/settings"},
+  ]
+
   return (
     <div>
       <Drawer
@@ -98,20 +105,28 @@ const Drawerr = ({ drawerWidth, setMyMode,noneorblock,drawerType,hideDrower }) =
               </ListItemButton>
             </ListItem> */}
 
+      {myList.map((item)=>{
+        return (
           <ListItem disablePadding 
           // @ts-ignore
-          sx={{bgcolor: currentLocation=== "/" ? theme.palette.ali1.main : null}}>
+          sx={{bgcolor: currentLocation=== item.path ? theme.palette.ali1.main : null}}>
             <ListItemButton
               onClick={() => {
-                navigate("/");
+                navigate(item.path);
               }}
             >
               <ListItemIcon>
-                <Home />
+                {item.icon}
               </ListItemIcon>
-              <ListItemText primary="Home" />
+              <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
+        )
+      })}
+
+
+
+
 
           {/* import { Link } from '@mui/material'; */}
           {/* seimport { IconButton } from '@mui/material/IconButton';
@@ -128,7 +143,7 @@ cond way to go create page ::::  <link href='/Create'></link>*/}
             </ListItem>
             </Link> */}
 
-          <ListItem disablePadding 
+          {/* <ListItem disablePadding 
                     // @ts-ignore
                     sx={{bgcolor: currentLocation=== "/create" ? theme.palette.ali1.main : null}}>
             <ListItemButton
@@ -141,7 +156,7 @@ cond way to go create page ::::  <link href='/Create'></link>*/}
               </ListItemIcon>
               <ListItemText primary="Create" />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
 
           {/* third way to go Profile page react router way ::::
             <link href='/Create'></link>*/}
@@ -157,7 +172,7 @@ cond way to go create page ::::  <link href='/Create'></link>*/}
             </ListItem>
           </Link> */}
 
-          <ListItem disablePadding 
+          {/* <ListItem disablePadding 
                     // @ts-ignore
                     sx={{bgcolor: currentLocation === "/profile" ? theme.palette.ali1.main : null}}>
             <ListItemButton
@@ -170,13 +185,13 @@ cond way to go create page ::::  <link href='/Create'></link>*/}
               </ListItemIcon>
               <ListItemText primary="Profile" />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
 
           {/*=================== The Best Way =====================  */}
           {/* forth way to go Settings page react router way ::::
             onClick={() =>{navigate("/Settings")}}*/}
           {/* without refresh without internet */}
-          <ListItem disablePadding 
+          {/* <ListItem disablePadding 
                     // @ts-ignore
                     sx={{bgcolor: currentLocation=== "/settings" ? theme.palette.ali1.main : null}}>
             <ListItemButton
@@ -189,7 +204,14 @@ cond way to go create page ::::  <link href='/Create'></link>*/}
               </ListItemIcon>
               <ListItemText primary="Settings" />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
+
+
+
+
+
+
+
 
           <ListItem disablePadding
                     // @ts-ignore
@@ -205,6 +227,8 @@ cond way to go create page ::::  <link href='/Create'></link>*/}
               <ListItemText primary="Log Out" />
             </ListItemButton>
           </ListItem>
+
+
         </List>
         <Divider />
         {/* <List>

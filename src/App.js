@@ -15,6 +15,7 @@ import {
 import Create from "./pages/create/Create";
 import Settings from './pages/settings/settings'
 import Logout from './pages/logout/logout'
+import NotFound from "./pages/NotFound";
 
 
 
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path="settings" element={<Settings />} />
       <Route path="logout" element={<Logout />} />
 
+      <Route path="*" element={<NotFound />} />
 
 
       {/* ... etc. */}
