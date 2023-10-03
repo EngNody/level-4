@@ -7,7 +7,7 @@ const NotFound = () => {
 
   return (
     <Box>
-      <Typography color={theme.palette.error.main} variant="h4">
+      <Typography color={theme.palette.error.main} variant="h5">
       <br/>
       <br/>
       There is no design yet

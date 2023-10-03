@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 // import InboxIcon from '@mui/icons-material/MoveToInbox';
 // import MailIcon from '@mui/icons-material/Mail';
 import Drawer from "@mui/material/Drawer";
-import { useTheme, IconButton } from "@mui/material";
+import { useTheme, IconButton, Box } from "@mui/material";
 // import { Link } from '@mui/material';
 import {
   Brightness4,
@@ -33,14 +33,14 @@ const Drawerr = ({ drawerWidth, setMyMode,noneorblock,drawerType,hideDrower }) =
   const theme = useTheme();
 
   const myList =[
-    {  text :"Home" , icon :<Home /> , path:"/"},
-    {  text :"Create" , icon :<Create /> , path:"/create"},
-    {  text :"Profile" , icon :<Person2 />, path:"/profile"},
-    {  text :"Settings" , icon :<Settings />, path:"/settings"},
+    {  text :"Home" , icon :<Home /> , path:"/",id:"1"},
+    {  text :"Create" , icon :<Create /> , path:"/create",id:"2"},
+    {  text :"Profile" , icon :<Person2 />, path:"/profile",id:"3"},
+    {  text :"Settings" , icon :<Settings />, path:"/settings",id:"4"},
   ]
 
   return (
-    <div>
+    <Box component="nav">
       <Drawer
         sx={{
           display:{xs:noneorblock,md:"block"},
@@ -107,10 +107,10 @@ const Drawerr = ({ drawerWidth, setMyMode,noneorblock,drawerType,hideDrower }) =
 
       {myList.map((item)=>{
         return (
-          <ListItem disablePadding 
+          <ListItem  disablePadding key={item.id}
           // @ts-ignore
           sx={{bgcolor: currentLocation=== item.path ? theme.palette.ali1.main : null}}>
-            <ListItemButton
+            <ListItemButton 
               onClick={() => {
                 navigate(item.path);
               }}
@@ -244,7 +244,7 @@ cond way to go create page ::::  <link href='/Create'></link>*/}
           ))}
         </List> */}
       </Drawer>
-    </div>
+    </Box>
   );
 };
 

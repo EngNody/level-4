@@ -9,67 +9,87 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Drawerr from "../MUI-components/Drawer";
 import Appbar from "../MUI-components/Appbar";
 import { useState } from "react";
-import {ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import getDesignTokens from "../styles/myTheme";
 // import { Margin } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
 const Root = () => {
-
-  const [mode, setMyMode] = useState(localStorage.getItem("currentTheme")===null?"light":localStorage.getItem("currentTheme")==="light"? "light" :"dark");
+  const [mode, setMyMode] = useState(
+    localStorage.getItem("currentTheme") === null
+      ? "light"
+      : localStorage.getItem("currentTheme") === "light"
+      ? "light"
+      : "dark"
+  );
 
   // const darkTheme = createTheme({
-// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   // });
 
+  const [noneorblock, setnoneorblock] = useState("none");
+  const [drawerType, setdrawerType] = useState("permanent");
 
-const [noneorblock, setnoneorblock] = useState("none");
-const [drawerType, setdrawerType] = useState("permanent");
+  const showDrower = () => {
+    setnoneorblock("block");
+    setdrawerType("temporary");
+  };
 
-const showDrower = () => {
-  setnoneorblock("block")
-  setdrawerType("temporary")
-}
+  const hideDrower = () => {
+    setnoneorblock("none");
+    setdrawerType("permanent");
+  };
 
-const hideDrower = () => {
-  setnoneorblock("none")
-  setdrawerType("permanent")
-}
-
-// Update the theme only if the mode changes
-const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-
+  // Update the theme only if the mode changes
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   return (
     <ThemeProvider theme={theme}>
-          <CssBaseline/>
+      <CssBaseline />
 
-    <div>
+      <div>
+        <Appbar
 
-      <Appbar drawerWidth={drawerWidth} showDrower={showDrower} theme={theme} />
+        // spread operator in react
+        {...{drawerWidth,showDrower,theme}}
 
-      <Drawerr drawerWidth={drawerWidth} setMyMode={setMyMode} noneorblock={noneorblock} drawerType={drawerType} hideDrower={hideDrower} />
+          // drawerWidth={drawerWidth}
+          // showDrower={showDrower}
+          // theme={theme}
+        />
 
-      <Box component="main"
-        sx={{
-          ml: {md:`${drawerWidth}px`},
-          mt: "100px",
-          display: "flex",
-          justifyContent: "center",
-        //   [darkTheme.breakpoints.down("md")]:{
-        //   // width:"100%"
-        //   ml: 0,
+        <Drawerr
+        // spread operator in react
+          {...{drawerWidth,setMyMode,noneorblock,drawerType,hideDrower }}
 
-        // }
-        }}
-      >
-        <Outlet />
-      </Box>
+          // drawerWidth={drawerWidth}
+          // setMyMode={setMyMode}
+          // noneorblock={noneorblock}
+          // drawerType={drawerType}
+          // hideDrower={hideDrower}
+        />
 
-      {/* Drawer */}
+        <Box
+          component="main"
+          sx={{
+            ml: { md: `${drawerWidth}px` },
+            mt: "100px",
+            display: "flex",
+            justifyContent: "center",
+            //   [darkTheme.breakpoints.down("md")]:{
+            //   // width:"100%"
+            //   ml: 0,
 
-      {/* <Box sx={{ display: "flex" }}>
+            // }
+          }}
+        >
+          <Outlet />
+        </Box>
+
+        {/* Drawer */}
+
+        {/* <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <Appbar drawerWidth={drawerWidth} />
 
@@ -121,7 +141,7 @@ const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
            p: 3 }}
         >
           <Toolbar /> */}
-          {/* <Typography paragraph>
+        {/* <Typography paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
             dolor purus non enim praesent elementum facilisis leo vel. Risus at
@@ -153,17 +173,17 @@ const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
             ultrices sagittis orci a.
           </Typography> */}
         {/* </Box> */}
-      {/* </Box> */} 
+        {/* </Box> */}
 
-      {/* <Typography variant='h3' component="main">New App</Typography> */}
+        {/* <Typography variant='h3' component="main">New App</Typography> */}
 
-      {/* <Button variant="text">Text</Button> */}
-      {/* <Button variant="contained" sx={{m:"50px"}}>Contained</Button> */}
-      {/* <Button variant="outlined">Outlined</Button> */}
+        {/* <Button variant="text">Text</Button> */}
+        {/* <Button variant="contained" sx={{m:"50px"}}>Contained</Button> */}
+        {/* <Button variant="outlined">Outlined</Button> */}
 
-      {/* <IconButton > */}
-      {/* <Menu /> */}
-      {/* <MenuIcon />
+        {/* <IconButton > */}
+        {/* <Menu /> */}
+        {/* <MenuIcon />
 
 </IconButton>
 
@@ -177,9 +197,8 @@ const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 <HomeIcon color="disabled" sx={{ fontSize: 40 }}/>
 <HomeIcon sx={{ color: "pink" }} />
 </IconButton> */}
-    </div>
+      </div>
     </ThemeProvider>
-
   );
 };
 
